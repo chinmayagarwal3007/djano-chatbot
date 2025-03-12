@@ -101,22 +101,22 @@
 </div>
 
 <script>
-  const messageList = document.querySelector('.message-list')
+  const messageList = document.querySelector('.messages-list')
   const messageForm = document.querySelector('.message-form')
   const messageInput = document.querySelector('.message-input')
 
-  messageForm.addEventListner('submit', (event) => {
-  
-  event.preventDefault()
+  messageForm.addEventListener('submit', (event) => {
+    console.log("Hello, World!");
+  event.preventDefault();
 
   const message = messageInput.value.trim()
   if(message.length === 0){
     return;
   }
-
+  console.log(message)
   const messageItem = document.createElement('li');
   messageItem.classList.add('message', 'sent');
-  messageItem.innerHtml = `
+  messageItem.innerHTML = `
   
           <div class="message-text">
             <div class="message-sender">
@@ -127,11 +127,12 @@
             </div>
           </div>
   `;
+  console.log(messageItem)
   messageList.appendChild(messageItem);
 
   messageItem.value = '';
 
-  fgetch('', {
+  fetch('', {
 
     method: 'POST',
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -145,7 +146,7 @@
     const response = data.response;
     const messageItem = document.createElement('li');
     messageItem.classList.add('message', 'received');
-    messageItem.innerHtml = `
+    messageItem.innerHTML = `
   
           <div class="message-text">
             <div class="message-sender">
@@ -156,6 +157,7 @@
             </div>
           </div>
   `;
+  console.log(messageItem)
   messageList.appendChild(messageItem);
   });
     });
