@@ -113,7 +113,6 @@
   if(message.length === 0){
     return;
   }
-  console.log(message)
   const messageItem = document.createElement('li');
   messageItem.classList.add('message', 'sent');
   messageItem.innerHTML = `
@@ -127,10 +126,9 @@
             </div>
           </div>
   `;
-  console.log(messageItem)
   messageList.appendChild(messageItem);
 
-  messageItem.value = '';
+  messageInput.value = '';
 
   fetch('', {
 
@@ -153,11 +151,10 @@
               <b>AI Chatbot</b>
             </div>
             <div class="message-content">
-              ${response}.
+              ${response}
             </div>
           </div>
   `;
-  console.log(messageItem)
   messageList.appendChild(messageItem);
   });
     });
