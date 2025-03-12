@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block styles %}
+<style>
+  body {
+    background-color: #f0f0f0;
+  }
+  .register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .card {
+    max-width: 400px;
+  }
+  .card-header {
+    background-color: #007bff;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .card-body {
+    padding: 30px;
+  }
+  .form-group {
+    margin-bottom: 20px;
+  }
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+  }
+  input[type=text], input[type=password] {
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  button[type=submit] {
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+  }
+  button[type=submit]:hover {
+    background-color: #0062cc;
+  }
+  .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+  }
+</style>
+{% endblock %}
+
+{% load widget_tweaks %}
+
+
+{% block content %}
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Register</h2>
+        <form method="post" class="border p-4 rounded shadow-sm">
+            {% csrf_token %}
+            
+            <!-- Username Field -->
+            <div class="mb-3">
+                <label for="id_username" class="form-label">Username</label>
+                {{ form.username|add_class:"form-control" }}
+                {% if form.username.errors %}
+                    <div class="text-danger">
+                        {% for error in form.username.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Email Field -->
+            <div class="mb-3">
+                <label for="id_email" class="form-label">Email</label>
+                {{ form.email|add_class:"form-control" }}
+                {% if form.email.errors %}
+                    <div class="text-danger">
+                        {% for error in form.email.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Password Field -->
+            <div class="mb-3">
+                <label for="id_password1" class="form-label">Password</label>
+                {{ form.password1|add_class:"form-control" }}
+                {% if form.password1.errors %}
+                    <div class="text-danger">
+                        {% for error in form.password1.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Re-enter Password Field -->
+            <div class="mb-3">
+                <label for="id_password2" class="form-label">Re-Enter Password</label>
+                {{ form.password2|add_class:"form-control" }}
+                {% if form.password2.errors %}
+                    <div class="text-danger">
+                        {% for error in form.password2.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+    </div>
+{% endblock %}
